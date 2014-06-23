@@ -21,6 +21,7 @@ namespace ActiveStateMachine
         public string SourceStateName { get; private set; }
 
         public string TargetStateName { get; private set; }
+
         public List<StateMachineAction> TransitionActionList { get; private set; }
 
         public string Trigger { get; private set; }

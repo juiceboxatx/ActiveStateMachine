@@ -119,7 +119,7 @@ namespace ApplicationServices
 
             // Notification Handler
             // because we use UI to trigger transitions devices would trigger normally themselves.
-            // Nevertheless, this is common, if SW user interfacescontrol devices
+            // Nevertheless, this is common, if SW user interfaces control devices
             // View and device managers communicate on system event bus and use notifications to trigger state machine
             if (args.EventType == StateMachineEventType.Command)
             {

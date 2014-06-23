@@ -13,6 +13,7 @@ namespace ActiveStateMachine
         }
 
         public string Name { get; private set; }
+
         public void Execute()
         {
             // Invoke the state machine action method

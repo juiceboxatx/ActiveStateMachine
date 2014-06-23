@@ -39,11 +39,11 @@ namespace ActiveStateMachine
             this.TriggerQueue = new BlockingCollection<string>(queueCapacity);
 
             // Initialize
-            InitStateMachine();
+            this.InitStateMachine();
 
             // Raise an event
-            RaiseStateMachineSystemEvent("StateMachine: Initialized", "System ready to start");
-            StateMachineEngine = EngineState.Initialized;
+            this.RaiseStateMachineSystemEvent("StateMachine: Initialized", "System ready to start");
+            this.StateMachineEngine = EngineState.Initialized;
         }
 
         public event EventHandler<StateMachineEventArgs> StateMachineEvent;
@@ -218,9 +218,11 @@ namespace ActiveStateMachine
                         this.ExecuteTransition(transition.Value);
                     }
 
-                    // do not place any code here because it will not be executed!
-                    // The foreach loop keeps spinning on the queue until thread is canceled
+                    
                 }
+
+                // do not place any code here because it will not be executed!
+                // The foreach loop keeps spinning on the queue until thread is canceled
             }
             catch (Exception ex)
             {

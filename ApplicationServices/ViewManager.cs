@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationServices
 {
-	class ViewManager
+	public class ViewManager
 	{
 		private string[] viewStates;
 		private string DefaultViewState;
@@ -15,6 +15,7 @@ namespace ApplicationServices
 		private IUserInterface _UI;
 
 		public event EventHandler<StateMachineEventArgs> ViewManagerEvent;
+		public event EventHandler<StateMachineEventArgs> UINotification;
 		public string CurrentView { get; private set; }
 
 		public IViewStateConfiguration ViewStateConfiguration { get; private set; }
@@ -65,46 +66,46 @@ namespace ApplicationServices
 			}
 		}
 
-        public void SystemEventHandler(object sender, StateMachineEventArgs args)
-        {
-            // Initialize
-            if (args.EventName == "OnInit")
-            {
-                this._UI.LoadViewState(this.DefaultViewState);
-                this.CurrentView = this.DefaultViewState;
-            }
-        }
-        /// <summary>
-        /// Method to raise a view manager event for logging, etc.
-        /// </summary>
-        /// <param name="name">"name"</param>
-        /// <param name="info">"info"</param>
-        /// <param name="eventType">"eventType"</param>
+		public void SystemEventHandler(object sender, StateMachineEventArgs args)
+		{
+			// Initialize
+			if (args.EventName == "OnInit")
+			{
+				this._UI.LoadViewState(this.DefaultViewState);
+				this.CurrentView = this.DefaultViewState;
+			}
+		}
+		/// <summary>
+		/// Method to raise a view manager event for logging, etc.
+		/// </summary>
+		/// <param name="name">"name"</param>
+		/// <param name="info">"info"</param>
+		/// <param name="eventType">"eventType"</param>
 		private void RaiseViewManagerEvent(string name, string info, StateMachineEventType eventType = StateMachineEventType.System)
 		{            
-            var vmEventHandler = this.ViewManagerEvent;
-            if (vmEventHandler != null)
-            {
-                var newVMargs = new StateMachineEventArgs(name, "View manager event: " + info, eventType, "View manager");
-                vmEventHandler(this, newVMargs);
-            }
+			var vmEventHandler = this.ViewManagerEvent;
+			if (vmEventHandler != null)
+			{
+				var newVMargs = new StateMachineEventArgs(name, "View manager event: " + info, eventType, "View manager");
+				vmEventHandler(this, newVMargs);
+			}
 		}
 
-        /// <summary>
-        /// Sends a command to 
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="info"></param>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
-        private void RaiseUICommand(string command, string info, string source, string target)
-        {
-            var vmEventHandler = this.ViewManagerEvent;
-            if (vmEventHandler != null)
-            {
-                var newVMargs = new StateMachineEventArgs(command, info, StateMachineEventType.Command, source, target);
-                vmEventHandler(this, newVMargs);
-            }
-        }
+		/// <summary>
+		/// Sends a command to 
+		/// </summary>
+		/// <param name="command"></param>
+		/// <param name="info"></param>
+		/// <param name="source"></param>
+		/// <param name="target"></param>
+		private void RaiseUICommand(string command, string info, string source, string target)
+		{
+			var uiNotificationEvent = this.UINotification;
+			if (uiNotificationEvent != null)
+			{
+				var newUIargs = new StateMachineEventArgs(command, info, StateMachineEventType.Command, source, target);
+				uiNotificationEvent(this, newUIargs);
+			}
+		}
 	}
 }

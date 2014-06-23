@@ -31,6 +31,22 @@ namespace TelephoneStateMachine
             this.RaiseDeviceEvent("PhoneLine", "OffInternal");
         }
 
+        public void ActionViewPhoneRings()
+        {
+            this.RaiseTelephoneUiEvent("ViewPhonerings");
+        }
+
+        public void ActionViewPhoneIdle()
+        {
+            this.RaiseTelephoneUiEvent("ViwePhoneIdle");
+            System.Media.SystemSounds.Beep.Play();
+        }
+
+        public void ActionViewTalking()
+        {
+            this.RaiseTelephoneUiEvent("ViewTalking");
+        }
+
         private void RaiseDeviceEvent(string target, string command)
         {
             var devEvent = this.TelephoneUiEvent;

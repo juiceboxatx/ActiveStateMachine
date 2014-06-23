@@ -4,7 +4,7 @@ namespace ActiveStateMachine
 {
     public class State
     {
-        public State(string name, Dictionary<string, Transition> transitionList, List<StateMachineAction> entryActions, List<StateMachineAction> exitActions, bool defaultState = true)
+        public State(string name, Dictionary<string, Transition> transitionList, List<StateMachineAction> entryActions, List<StateMachineAction> exitActions, bool defaultState = false)
         {
             this.StateName = name;
             this.StateTransitionList = transitionList;

@@ -45,8 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TelephoneActivities.cs" />
     <Compile Include="TelephoneDeviceConfiguration.cs" />
+    <Compile Include="TelephoneStateMachine.cs" />
+    <Compile Include="TelephoneStateMachineConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ActiveStateMachine\ActiveStateMachine.csproj">
+      <Project>{321b9662-297f-4967-8413-0dd01371fee5}</Project>
+      <Name>ActiveStateMachine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj">
       <Project>{3da079d6-1f9f-4e6f-b151-2367283f372e}</Project>
       <Name>ApplicationServices</Name>
