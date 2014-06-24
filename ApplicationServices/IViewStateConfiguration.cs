@@ -12,6 +12,6 @@ namespace ApplicationServices
 
         string[] ViewStateList { get; set; }
 
-        string DefaultViewState { get; set; }
+        string DefaultViewState { get; }
     }
 }

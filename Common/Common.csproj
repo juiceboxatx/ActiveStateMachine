@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDeviceConfiguration.cs" />
+    <Compile Include="IViewState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachineEventArgs.cs" />
   </ItemGroup>

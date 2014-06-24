@@ -98,7 +98,7 @@ namespace ApplicationServices
 		/// <param name="info"></param>
 		/// <param name="source"></param>
 		/// <param name="target"></param>
-		private void RaiseUICommand(string command, string info, string source, string target)
+		public void RaiseUICommand(string command, string info, string source, string target)
 		{
 			var uiNotificationEvent = this.UINotification;
 			if (uiNotificationEvent != null)

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneStateMachine", "TelephoneStateMachine\TelephoneStateMachine.csproj", "{DF4AE873-0890-4579-B7D9-CB61A75B0135}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelephoneUI", "TelephoneUI\TelephoneUI.csproj", "{239886E3-1105-4EEB-B8A1-E6972068BFD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{DF4AE873-0890-4579-B7D9-CB61A75B0135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF4AE873-0890-4579-B7D9-CB61A75B0135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF4AE873-0890-4579-B7D9-CB61A75B0135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{239886E3-1105-4EEB-B8A1-E6972068BFD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{239886E3-1105-4EEB-B8A1-E6972068BFD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{239886E3-1105-4EEB-B8A1-E6972068BFD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{239886E3-1105-4EEB-B8A1-E6972068BFD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
