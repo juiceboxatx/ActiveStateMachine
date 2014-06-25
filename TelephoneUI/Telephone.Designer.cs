@@ -178,6 +178,7 @@
             this.Controls.Add(this.bttn_ReceiverDown);
             this.Name = "Telephone";
             this.Text = "Telephone UI";
+            this.Load += new System.EventHandler(this.Telephone_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

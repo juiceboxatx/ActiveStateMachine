@@ -176,7 +176,7 @@ namespace ActiveStateMachine
             return this.StateList[targetStateName];
         }
 
-        private void InitStateMachine()
+        public void InitStateMachine()
         {
             // Set previous state to an unspecific initial state. The intial state never will be used during normal operation.
             this.PreviousState = this.initialState;
@@ -213,7 +213,7 @@ namespace ActiveStateMachine
                     }
                     // Compare Trigger
                     foreach (var transition in this.CurrentState.StateTransitionList.Where(
-                                    transition => trigger == transition.Value.Trigger))
+                                    t => trigger == t.Value.Trigger))
                     {
                         this.ExecuteTransition(transition.Value);
                     }

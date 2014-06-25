@@ -27,9 +27,24 @@ namespace TelephoneUI
             InitializeComponent();
         }
 
-        private void Telephone_Load(object sender, System.EventArgs e)
+        private void Telephone_Load(object sender, EventArgs e)
         {
-            
+            // Application Services
+            // Initialized view states and view manager
+            this.viewStateConfiguration = new TelephoneViewStateConfiguration();
+            this.viewMan = ViewManager.Instance;
+            this.viewMan.LoadViewStateConfiguration(this.viewStateConfiguration, this);
+
+            // Load devices controlled by state machine into device manager
+            this.devManConfiguation = new TelephoneDeviceConfiguration();
+            this.devMan = DeviceManager.Instance;
+            this.devMan.LoadDeviceConfiguration(this.devManConfiguation);
+
+            // State Machine
+            // Initialize state machine and start state machine
+            this.telephoneStateMachine = new TelephoneStateMachine.TelephoneStateMachine(new TelephoneStateMachineConfiguration());
+            this.telephoneStateMachine.InitStateMachine();
+            this.telephoneStateMachine.Start();
         }
 
         public void LoadViewState(string viewState)
@@ -60,26 +75,26 @@ namespace TelephoneUI
             if (telephoneViewState.Line)
             {
                 // thread safe windows form property update
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.Text = "Active"));
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.BackColor = Color.Red));
+                this.Invoke(new MethodInvoker(() => this.labelLineValue.Text = "Active"));
+                this.Invoke(new MethodInvoker(() => this.labelLineValue.BackColor = Color.Red));
             }
             else
             {
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.Text = "Off"));
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.BackColor = Color.Green));
+                this.Invoke(new MethodInvoker(() => this.labelLineValue.Text = "Off"));
+                this.Invoke(new MethodInvoker(() => this.labelLineValue.BackColor = Color.Green));
             }
 
             // Receiver
             if (telephoneViewState.ReceiverHungUp)
             {
                 // thread safe windows form property update
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.Text = "Down"));
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.BackColor = Color.Green));
+                this.Invoke(new MethodInvoker(() => this.labelReceiverValue.Text = "Down"));
+                this.Invoke(new MethodInvoker(() => this.labelReceiverValue.BackColor = Color.Green));
             }
             else
             {
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.Text = "Lifted"));
-                this.Invoke(new MethodInvoker(() => this.labelBellValue.BackColor = Color.Red));
+                this.Invoke(new MethodInvoker(() => this.labelReceiverValue.Text = "Lifted"));
+                this.Invoke(new MethodInvoker(() => this.labelReceiverValue.BackColor = Color.Red));
             }
 
             // current view state
@@ -98,7 +113,9 @@ namespace TelephoneUI
 
         private void bttn_Call_Click(object sender, EventArgs e)
         {
-            this.viewMan.RaiseUICommand("ActiveExternal", "Initiate Call button pressed in view state:" + this.CurrentViewState.Name, "UI", "Receiver");
+            this.viewMan.RaiseUICommand("OnLineExternalActive", "Initiate Call button pressed in view state:" + this.CurrentViewState.Name, "UI", "Receiver");
         }
+
+        
     }
 }

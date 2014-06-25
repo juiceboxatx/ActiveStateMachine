@@ -33,12 +33,12 @@ namespace TelephoneStateMachine
 
         public void ActionViewPhoneRings()
         {
-            this.RaiseTelephoneUiEvent("ViewPhonerings");
+            this.RaiseTelephoneUiEvent("ViewPhoneRings");
         }
 
         public void ActionViewPhoneIdle()
         {
-            this.RaiseTelephoneUiEvent("ViwePhoneIdle");
+            this.RaiseTelephoneUiEvent("ViewPhoneIdle");
             System.Media.SystemSounds.Beep.Play();
         }
 
@@ -49,7 +49,7 @@ namespace TelephoneStateMachine
 
         private void RaiseDeviceEvent(string target, string command)
         {
-            var devEvent = this.TelephoneUiEvent;
+            var devEvent = this.TelephoneDeviceEvent;
             if (devEvent != null)
             {
                 var telArgs = new StateMachineEventArgs(command, "Device command", StateMachineEventType.Command, "State machine action", target);
