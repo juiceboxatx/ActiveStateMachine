@@ -56,6 +56,9 @@ namespace TelephoneStateMachine
             var actionViewPhoneIdle = new StateMachineAction("ActionViewPhoneIdle", this.TelephoneActivities.ActionViewPhoneIdle);
             var actionViewTalking = new StateMachineAction("ActionViewTalking", this.TelephoneActivities.ActionViewTalking);
 
+            // Error Actions
+            var actionViewErrorPhoneRings = new StateMachineAction("ActionViewErrorPhoneRings", TelephoneActivities.ActionErrorPhoneRings);
+
             // Create transitions and corresponding triggers, states need to be added
             var emptyList = new List<StateMachineAction>(); // to avoid null reference exceptions, use an empty list
             // transition IncomingCall
@@ -77,6 +80,12 @@ namespace TelephoneStateMachine
             var CallEndedActions = new List<StateMachineAction>();
             CallEndedActions.Add(actionViewPhoneIdle);
             var transCallEnded = new Transition("TransitionCallEnded", "StateTalking", "StatePhoneIdle", emptyList, CallEndedActions, "OnReceiverDown");
+
+            // transition ErrorPhoneRings - self-transition on PhoneRings state
+            var errorPhoneRingsActions = new List<StateMachineAction>();
+            errorPhoneRingsActions.Add(actionViewErrorPhoneRings);
+            var transErrorPhoneRings = new Transition("TransitionErrorPhoneRings", "StatePhoneRings", "StatePhoneRings", emptyList, errorPhoneRingsActions, "OnBellBroken");
+
             #endregion
 
             #region Assemble all states
@@ -97,6 +106,7 @@ namespace TelephoneStateMachine
             exitActionsPhoneRings.Add(actionBellSilent);
             transitionsPhoneRings.Add("TransitionCallBlocked", transCallBlocked);
             transitionsPhoneRings.Add("TransitionCallAccepted", transCallAccepted);
+            transitionsPhoneRings.Add("TransitionErrorPhoneRings", transErrorPhoneRings);
             // Always specify all action lists, even empty ones, do not pass null into a state Lists are read via foreach, which will return an error
             var phoneRings = new State("StatePhoneRings", transitionsPhoneRings, entryActionsPhoneRings, exitActionsPhoneRings);
 

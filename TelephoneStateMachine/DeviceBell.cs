@@ -19,8 +19,28 @@ namespace TelephoneStateMachine
 
         public void Rings()
         {
-            this.Ringing = true;
-            System.Media.SystemSounds.Hand.Play();
+            try
+            {
+                // Sample Errors
+                // Catastrophic error stopping the system
+                //throw (new SystemException("System device completely failed - Fatal hardware error!"));
+                throw (new SystemException("OnBellBroken"));
+
+                // Normal operation
+                this.Ringing = true;
+                System.Media.SystemSounds.Hand.Play();
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "OnBellBroken")
+                {
+                    this.DoNotificationCallBack("OnBellBroken", ex.Message, "Bell");
+                }
+                else
+                {
+                    this.DoNotificationCallBack("CompleteFailure", ex.Message, "Bell");
+                }
+            }
         }
 
         public void Silent()

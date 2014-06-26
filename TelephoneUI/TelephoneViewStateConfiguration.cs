@@ -39,6 +39,7 @@ namespace TelephoneUI
             {
                 {"ViewPhoneIdle", new TelephoneViewState("ViewPhoneIdle",false,false,true,true)},
                 {"ViewPhoneRings", new TelephoneViewState("ViewPhoneRings",true,false,true)},
+                {"ViewErrorPhoneRings", new TelephoneViewState("ViewErrorPhoneRings",true,false,true)},
                 {"ViewTalking", new TelephoneViewState("ViewTalking",false,true,false)},
             };
 

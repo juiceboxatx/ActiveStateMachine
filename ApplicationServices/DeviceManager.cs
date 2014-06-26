@@ -38,7 +38,7 @@ namespace ApplicationServices
             this.RaiseDeviceManagerEvent("Added device", name);
         }
 
-        public void DeviceCommandHandler(DeviceManager deviceManager, StateMachineEventArgs args)
+        public void DeviceCommandHandler(object sender, StateMachineEventArgs args)
         {
             // Listen to command events only
             if (args.EventType != StateMachineEventType.Command)
@@ -78,11 +78,11 @@ namespace ApplicationServices
 
         public void RaiseDeviceManagerNotification(string command, string info, string source)
         {
-            var devManagerEvent = this.DeviceManagerEvent;
-            if (devManagerEvent != null)
+            var devManagerNotification = this.DeviceManagerNotification;
+            if (devManagerNotification != null)
             {
                 var newDMArgs = new StateMachineEventArgs(command, info, StateMachineEventType.Notification, source, "State Machine");
-                devManagerEvent(this, newDMArgs);
+                devManagerNotification(this, newDMArgs);
             }
         }
 

@@ -17,7 +17,7 @@ namespace TelephoneStateMachine
         public void ActiveExternal()
         {
             this.LineActiveExternal = true;
-            this.DoNotificationCallBack("OnLineExternalActive", "Phone Line set ToString active", this.DevName);
+            this.DoNotificationCallBack("OnLineExternalActive", "Phone Line set to active", this.DevName);
         }
 
         public void ActiveInternal()
@@ -25,7 +25,7 @@ namespace TelephoneStateMachine
             this.LineActiveInternal = true;
         }
 
-        public void OffInterval()
+        public void OffInternal()
         {
             this.LineActiveInternal = false;
             System.Media.SystemSounds.Hand.Play();

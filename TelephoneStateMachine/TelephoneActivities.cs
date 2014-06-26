@@ -11,6 +11,7 @@ namespace TelephoneStateMachine
         public event EventHandler<StateMachineEventArgs> TelephoneUiEvent;
 
         // Device Actions
+        #region Device Actions
         public void ActionBellRings()
         {
             this.RaiseDeviceEvent("Bell", "Rings");
@@ -29,11 +30,14 @@ namespace TelephoneStateMachine
         public void ActionLineOff()
         {
             this.RaiseDeviceEvent("PhoneLine", "OffInternal");
-        }
+        } 
+        #endregion
 
+        #region View Actions
         public void ActionViewPhoneRings()
         {
             this.RaiseTelephoneUiEvent("ViewPhoneRings");
+            //System.Media.SystemSounds.Hand.Play();
         }
 
         public void ActionViewPhoneIdle()
@@ -45,7 +49,16 @@ namespace TelephoneStateMachine
         public void ActionViewTalking()
         {
             this.RaiseTelephoneUiEvent("ViewTalking");
+        } 
+        #endregion
+
+        #region Error Actions
+
+        public void ActionErrorPhoneRings()
+        {
+            this.RaiseTelephoneUiEvent("ViewErrorPhoneRings");
         }
+        #endregion
 
         private void RaiseDeviceEvent(string target, string command)
         {

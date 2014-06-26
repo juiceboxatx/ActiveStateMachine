@@ -75,7 +75,8 @@ namespace ActiveStateMachine
         }
 
         public void Start()
-        {
+        {          
+
             // Create cencellation token for QueueWorker method
             this.tokenSource = new CancellationTokenSource();
 
@@ -137,6 +138,12 @@ namespace ActiveStateMachine
                 return;
             }
 
+            // Self transition - Just do the transition without executing exit, entry actions or guards
+            if (transition.SourceStateName == transition.TargetStateName)
+            {
+                transition.TransitionActionList.ForEach(t => t.Execute());
+                return; // Important: return directly from self transition
+            }
             // Run all exit actions of teh old state
             this.CurrentState.ExitActions.ForEach(a => a.Execute());
 
@@ -252,7 +259,19 @@ namespace ActiveStateMachine
 
         public void InternalNotificationHandler(object sender, StateMachineEventArgs intArgs)
         {
-            this.EnterTrigger(intArgs.EventName);
+            // Catastrophic error
+            if (intArgs.EventName == "CompleteFailure")
+            {
+                this.RaiseStateMachineSystemCommand("CompleteFailure", intArgs.EventInfo + " Device : " + intArgs.Source);
+                // stop state machine to avoid any damage
+                this.Stop();
+            }
+            // Normal operation
+            else
+            {                
+                this.EnterTrigger(intArgs.EventName);
+            }
+            
         }
     }
 }

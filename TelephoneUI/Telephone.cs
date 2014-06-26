@@ -49,6 +49,12 @@ namespace TelephoneUI
 
         public void LoadViewState(string viewState)
         {
+            if (viewState == "CompleteFailure")
+            {
+                var result = MessageBox.Show("Application failed irreparably and will be shut down.", "Global Error", MessageBoxButtons.OK);
+                this.Invoke(new MethodInvoker(this.Close));
+                return;
+            }
             var telephoneViewState = (TelephoneViewState)viewMan.ViewStateConfiguration.ViewStates[viewState];
             this.SetValues(telephoneViewState);
             this.CurrentViewState = telephoneViewState;
@@ -97,8 +103,18 @@ namespace TelephoneUI
                 this.Invoke(new MethodInvoker(() => this.labelReceiverValue.BackColor = Color.Red));
             }
 
-            // current view state
-            this.Invoke(new MethodInvoker(() => this.labelCurrentViewState.Text = telephoneViewState.Name));
+            // Error handling
+            if (telephoneViewState.Name == "ViewErrorPhoneRings")// Error display
+            {
+                this.Invoke(new MethodInvoker(() => this.labelCurrentViewState.Text = "Bell is broken"));
+                this.Invoke(new MethodInvoker(() => this.labelCurrentViewState.BackColor = Color.Red));
+            }
+            else // current view state
+            {
+                this.Invoke(new MethodInvoker(() => this.labelCurrentViewState.Text = telephoneViewState.Name));
+                this.Invoke(new MethodInvoker(() => this.labelCurrentViewState.BackColor = Color.White));
+            }
+            
         }
 
         private void bttn_ReceiverDown_Click(object sender, EventArgs e)

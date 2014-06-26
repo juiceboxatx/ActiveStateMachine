@@ -74,6 +74,12 @@ namespace ApplicationServices
 				this._UI.LoadViewState(this.DefaultViewState);
 				this.CurrentView = this.DefaultViewState;
 			}
+
+            // Catastrophic error handling
+            if (args.EventName == "CompleteFailure")
+            {
+                this._UI.LoadViewState("CompleteFailure");
+            }
 		}
 		/// <summary>
 		/// Method to raise a view manager event for logging, etc.
