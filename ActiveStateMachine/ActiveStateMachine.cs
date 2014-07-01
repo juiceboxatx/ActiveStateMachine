@@ -144,10 +144,11 @@ namespace ActiveStateMachine
                 transition.TransitionActionList.ForEach(t => t.Execute());
                 return; // Important: return directly from self transition
             }
-            // Run all exit actions of teh old state
+
+            // Run all exit actions of the old state
             this.CurrentState.ExitActions.ForEach(a => a.Execute());
 
-            // Run all guars of the transition
+            // Run all guards of the transition
             transition.GuardList.ForEach(g => g.Execute());
             string info = transition.GuardList.Count + " guard actions executed!";
             this.RaiseStateMachineSystemEvent("State machine: ExcuteTransition", info);

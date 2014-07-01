@@ -24,7 +24,7 @@ namespace TelephoneStateMachine
                 // Sample Errors
                 // Catastrophic error stopping the system
                 //throw (new SystemException("System device completely failed - Fatal hardware error!"));
-                throw (new SystemException("OnBellBroken"));
+                //throw (new SystemException("OnBellBroken"));
 
                 // Normal operation
                 this.Ringing = true;

@@ -12,6 +12,7 @@ namespace TelephoneStateMachine
 
         // Device Actions
         #region Device Actions
+
         public void ActionBellRings()
         {
             this.RaiseDeviceEvent("Bell", "Rings");
@@ -30,10 +31,12 @@ namespace TelephoneStateMachine
         public void ActionLineOff()
         {
             this.RaiseDeviceEvent("PhoneLine", "OffInternal");
-        } 
-        #endregion
+        }
+
+        #endregion Device Actions
 
         #region View Actions
+
         public void ActionViewPhoneRings()
         {
             this.RaiseTelephoneUiEvent("ViewPhoneRings");
@@ -49,8 +52,9 @@ namespace TelephoneStateMachine
         public void ActionViewTalking()
         {
             this.RaiseTelephoneUiEvent("ViewTalking");
-        } 
-        #endregion
+        }
+
+        #endregion View Actions
 
         #region Error Actions
 
@@ -58,7 +62,8 @@ namespace TelephoneStateMachine
         {
             this.RaiseTelephoneUiEvent("ViewErrorPhoneRings");
         }
-        #endregion
+
+        #endregion Error Actions
 
         private void RaiseDeviceEvent(string target, string command)
         {
